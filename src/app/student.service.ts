@@ -18,11 +18,7 @@ export class StudentService {
   }
 
   createStudent(student : IStudent): Observable<IStudent>{
-    return this.http.post<IStudent>(URL_BACKEND+ "student/create",student, {
-      headers: new HttpHeaders({
-           'Content-Type':  'application/json',
-         })
-    });
+    return this.http.post<IStudent>(URL_BACKEND+ "student/create",student);
   }
 
   updateStudent(id: any , student: IStudent): Observable<IStudent> {

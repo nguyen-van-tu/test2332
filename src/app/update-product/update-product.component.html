@@ -1,15 +1,42 @@
-<form (ngSubmit)="updateStudent(students._id)">
-    <h3>StudentCode</h3>
-    <input name = "name" type="text" [(ngModel)]="students.studentCode" >
-    <h3>Name</h3>
-    <input name = "name" type="text" [(ngModel)]="students.name">
-    <h3>Gender</h3>
-    <input name = "gender" type="radio" [(ngModel)]="students.gender" value="nam" > Nam
-    <input name = "gender" type="radio" [(ngModel)]="students.gender" value="nữ" > Nữ
-    <input name = "gender" type="radio" [(ngModel)]="students.gender" value="khác" > Khác
-    <h3>Address</h3>
-   <input name = "name" type="text" [(ngModel)]="students.address">
+<form name="form" class="form-group"  #f="ngForm" novalidate> 
+   <input name="studentCode" type="text" class="form-control" id="studentCode" placeholder="Student Code*"
+  [(ngModel)]="students.studentCode" #studentCode="ngModel" required="required" minlength="5" maxlength="5">
 
-    <button class="badge-success" type="submit" >Update</button>
+<div *ngIf="f.submitted && studentCode.invalid">
+  <div *ngIf="studentCode.errors?.required" class="text-danger" style="color: red;">Vui lòng nhập mã sinh viên</div>
+  <div *ngIf="studentCode.errors?.minlength" class="text-danger" style="color: red;">Mã sinh viên gồm 5 kí tự</div>
+  <div *ngIf="studentCode.errors?.maxlength" class="text-danger" style="color: red;">Mã sinh viên gồm 5 kí tự</div>
+
+</div>
+<br>
+<br>
+<input name="name" type="text" class="form-control" id="name" placeholder=" Student Name*"
+[(ngModel)]="students.name" #name="ngModel" required="required">
+
+<div *ngIf="f.submitted && name.invalid">
+<div *ngIf="name.errors?.required" class="text-danger" style="color: red;">Vui lòng nhập tên sinh viên</div>
+</div>
+
+  <h3>Gender</h3>
+  <input name = "gender" type="radio" [(ngModel)]="students.gender" id="gender" value="nam"  #gender="ngModel" required="required"> Nam
+  <input name = "gender" type="radio" [(ngModel)]="students.gender" id="gender" value="nữ"  #gender="ngModel" required="required"> Nữ
+  <input name = "gender" type="radio" [(ngModel)]="students.gender" id="gender" value="bê đê"  #gender="ngModel" required="required"> Bê đê
+
+  <div *ngIf="f.submitted && gender.invalid">
+        <div *ngIf="gender.errors?.required" class="text-danger" style="color: red;">Vui lòng chọn giới tính</div>
+        </div>
+<br>
+<br>
+  <input name="address" type="text" class="form-control" id="address" placeholder=" Address*"
+  [(ngModel)]="students.address" #address="ngModel" required="required">
+  
+  <div *ngIf="f.submitted && address.invalid">
+  <div *ngIf="address.errors?.required" class="text-danger" style="color: red;">Vui lòng nhập địa chỉ</div>
+  </div>
+ <br>
+ <br>
+
+ <button  type="submit" (click)= "updateStudent(students._id)">Update</button>
+ <button><a [routerLink]="''" class="btn btn-outline-primary" style="text-decoration: none">Back </a></button>
   
   </form>

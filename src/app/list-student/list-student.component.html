@@ -1,20 +1,27 @@
-<h1>list student </h1>
-<a routerLink="/create">Create new student</a>
-<table class="table table-striped" border="1px">
+<h1>List student </h1>
+
+
+<button class="badge-light"><a  routerLink="create" style="text-decoration: none">Add new student</a ></button>
+  <br>
+  <br>
+
+  <table class="table table-striped" border="1px">
   <tr>
     <td>StudentCode</td>
     <td>Name</td>
     <td>Gender</td>
     <td>Address</td>
-    <td>Sửa</td>
+    <td>Update</td>
+    <td>Delete</td>
   </tr>
   <tr *ngFor="let student of listStudents">
     <td>{{student.studentCode}}</td>
     <td>{{student.name}}</td>
     <td>{{student.gender}}</td>
     <td>{{student.address}}</td>
-    <button type="button" class="btn btn-outline-success" [routerLink]="'update/'+student._id">Sửa</button>
-
+    <button type="button" class="icon-edit" [routerLink]="'update/'+student._id">Update</button>
+    <td><button class="btn btn-outline-success" type="submit" (click)="deleteStudent(student._id)">Delete</button>
+    </td>
 
   </tr>
 </table>

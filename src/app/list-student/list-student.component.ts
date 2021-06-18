@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { IStudent } from '../i-student';
 import { StudentService } from '../student.service';
 
@@ -11,7 +12,8 @@ export class ListStudentComponent implements OnInit {
 
   listStudents : Array< IStudent> =[]
 
-  constructor(private studentService : StudentService) { 
+  constructor(private studentService : StudentService,
+              private router : Router) { 
     this.getAllStudent();
   }
 
@@ -22,6 +24,14 @@ export class ListStudentComponent implements OnInit {
     this.studentService.getAllStudent().subscribe(student =>{
       console.log("test")
       this.listStudents = student
+    });
+  }
+
+  deleteStudent(id:string){
+    this.studentService.deleteStudent(id).subscribe(() =>{
+      console.log("test4")
+      alert('Đã xóa');
+      this.router.navigate(['/'])
     });
   }
 }
